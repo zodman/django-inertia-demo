@@ -1,13 +1,24 @@
 import { InertiaApp } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
 import axios from "axios";
+import PortalVue from 'portal-vue'
+
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 Vue.config.productionTip = false;
 
-Vue.use(InertiaApp)
+Vue.use(InertiaApp);
+Vue.use(PortalVue);
+
+window.route = function(args) {
+  return '/'
+};
+
+Vue.mixin({ methods: { route: window.route } });
+
+
 
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script
@@ -19,7 +30,6 @@ import Index from "./Pages/Index";
 const pages = {
   'Index': Index
 }
-
 new Vue({
   render: h => h(InertiaApp, {
     props: {

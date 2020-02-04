@@ -16,11 +16,17 @@
     "@inertiajs/inertia": "^0.1.7",
     "@inertiajs/inertia-vue": "^0.1.2",
     "@vue/component-compiler-utils": "^3.1.1",
+    "autoprefixer": "^9.7.4",
     "axios": "^0.19.2",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
     "parcel-bundler": "^1.12.4",
+    "popper.js": "^1.16.1",
+    "portal-vue": "^2.1.7",
+    "sass": "^1.25.0",
+    "tailwindcss": "^1.1.4",
     "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4",
     "vue-template-compiler": "^2.6.11"
   }
 }
