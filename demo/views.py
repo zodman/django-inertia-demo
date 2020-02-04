@@ -1,5 +1,5 @@
 from django.shortcuts import render
+from inertia.views import render_inertia
 
 def index(request):
-    context = {}
-    return render(request, "base.html", context)
+    return render_inertia(request, "Index")
