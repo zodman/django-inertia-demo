@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    {% comment "" %}
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+    {% endcomment %}
+    
+    <script src="{{ STATIC_URL}}dist/app.js" defer></script>
+  </head>
+  <body>
+    {% page|json_script:"page"%}
+    <div id="app"></div>
+  </body>
+</html>

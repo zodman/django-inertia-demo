@@ -1,0 +1,23 @@
+{
+  "name": "django_inertia_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "runserver": "python manage.py runserver",
+    "parcel": "parcel watch demo/static/src/* -d demo/static/dist/",
+    "dev": "concurrently npm:parcel npm:runserver"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@inertiajs/inertia": "^0.1.7",
+    "@inertiajs/inertia-vue": "^0.1.2",
+    "concurrently": "^5.1.0",
+    "cross-env": "^7.0.0",
+    "parcel-bundler": "^1.12.4",
+    "vue": "^2.6.11"
+  }
+}
