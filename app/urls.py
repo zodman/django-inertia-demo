@@ -1,9 +1,9 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from demo.views import index 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index)
+    path('', include("demo.urls")),
 ] + staticfiles_urlpatterns()

@@ -124,3 +124,5 @@ dmypy.json
 node_modules
 
 demo/static/dist
+
+.vscode

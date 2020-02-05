@@ -15,13 +15,19 @@
               </div>
             </dropdown>
           </div>
-          <!-- div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
-            <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
+          <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
+            <div class="mt-1 mr-4">
+              {{ $page.auth.user.account.name }}
+              </div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
                 <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
-                  <span>{{ $page.auth.user.first_name }}</span>
-                  <span class="hidden md:inline">{{ $page.auth.user.last_name }}</span>
+                  <span>
+                     {{ $page.auth.user.first_name }} 
+                  </span>
+                  <span class="hidden md:inline">
+                    {{ $page.auth.user.last_name }}
+                    </span>
                 </div>
                 <icon class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" name="cheveron-down" />
               </div>
@@ -32,7 +38,7 @@
               </div>
             </dropdown>
           </div>
-        </div-->
+        </div>
         <div class="flex flex-grow overflow-hidden">
           <main-menu :url="url()" class="bg-indigo-800 flex-shrink-0 w-56 p-12 hidden md:block overflow-y-auto" />
           <div class="flex-1 overflow-hidden px-4 py-8 md:p-12 overflow-y-auto" scroll-region>

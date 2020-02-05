@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'demo',
+    'js_routes',
     'inertia',
 ]
 
@@ -122,3 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+JS_ROUTES_INCLUSION_LIST = [
+    'demo',
+]

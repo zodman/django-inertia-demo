@@ -56,7 +56,7 @@ def render_inertia(request, component_name, props=None, template_name=None):
         else:
             shared[key] = value
 
-    props['shared'] = shared
+    props.update(shared)
 
     # subsequent renders
     if ('x-inertia' in request.headers and

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "runserver": "cross-env PYTHONUNBUFFERED=1 python manage.py runserver",
-    "parcel": "parcel watch demo/static/src/* -d demo/static/dist/ --public-url /static/",
-    "build": "parcel build demo/static/src/* -d demo/static/dist/ --public-url /static/",
+    "parcel": "parcel watch demo/static/src/* -d demo/static/dist/ --public-url /static/dist/",
+    "build": "parcel build demo/static/src/* -d demo/static/dist/ --public-url /static/dist/",
     "dev": "concurrently npm:parcel npm:runserver"
   },
   "author": "",
