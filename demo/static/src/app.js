@@ -11,14 +11,7 @@ Vue.config.productionTip = false;
 
 Vue.use(InertiaApp);
 Vue.use(PortalVue);
-
-window.route = function(url_name) {
-  
- return window.reverseUrl("demo:"+url_name);
-  
-}
-
-Vue.mixin({ methods: { route: window.route } });
+Vue.mixin({ methods: { route: window.reverseUrl } });
 
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script

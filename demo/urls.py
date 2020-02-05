@@ -8,7 +8,7 @@ urlpatterns = [
     
     path('users/', index, name='users'),
     path('users/logout', index, name='logout'),
-    path('users/edit', index, name='users.edit'),
+    path('users/edit/<int:id>', index, name='users.edit'),
     path('reports', index, name='reports'),
     path('organizations', index, name='organizations'),
     path('dashboard', index, name='dashboard'),
