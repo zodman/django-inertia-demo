@@ -16,7 +16,6 @@ Vue.mixin({ methods: { route: window.reverseUrl } });
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script
 const page = JSON.parse(document.getElementById("page").textContent);
-
 import Index from "./Pages/Index";
 
 const pages = {

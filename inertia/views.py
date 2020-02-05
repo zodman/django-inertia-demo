@@ -11,6 +11,8 @@ from .version import asset_version
 
 from django.views.generic import View
 from django.conf import settings
+from django.core import serializers
+
 
 
 def _build_context(component_name, props, version, url):
@@ -82,9 +84,9 @@ class InertiaMixin():
     component_name = ""
     props = None
     template_name = None
-    serializer_class = None
+    serializer_class = serializers.get_serializer("json")
 
-    def render_to_response(self, context, many=False):
+    def render_to_response(self, context):
         if self.serializer_class is None:
             raise ImproperlyConfigured(
                 "%(cls)s is missing a ModelSerializer. Define "
@@ -93,14 +95,12 @@ class InertiaMixin():
                 }
             )
 
-        if (many):
-            object_name = self.get_context_object_name(self.object_list)
-            serialized_object = self.serializer_class(
-                self.object_list, many=True).data
-        else:
-            object_name = self.get_context_object_name(self.object)
-            serialized_object = self.serializer_class(
-                self.object).data
+        
+        
+        object_name = self.get_context_object_name(self.object)
+        serialized_object = self.serializer_class().serialize(self.object).getvalue()
+
+        assert False, serialized_object
 
         if self.props is None:
             self.props = {object_name: serialized_object}
