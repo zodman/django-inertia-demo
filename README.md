@@ -16,3 +16,15 @@ npm run dev
 ```
 
 
+## TODO
+
+### Contacts
+- [X] List
+- [ ] Support pagination
+- [ ] filter contacts
+- [ ] Edit contact
+- [ ] Create contact
+
+### Organization
+
+- [ ] CRUD!

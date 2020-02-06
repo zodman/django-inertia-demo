@@ -13,6 +13,7 @@ def share_flash(request, success=False, error=False, errors = []):
 class ContactView(InertiaListView):
     model = Contact
     component_name ="Contacts"
+    paginate_by = 20
 
     def get_serialized_object(self):
         return list(self.object_list.values("first_name",'last_name','organization__name','city','phone'))
