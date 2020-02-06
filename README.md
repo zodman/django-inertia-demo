@@ -18,6 +18,11 @@ npm run dev
 
 ## TODO
 
+### Inertia django adapter
+- [X] Implement the correct way of the share
+- [ ] Decouple the serializer model part 
+
+
 ### Contacts
 - [X] List
 - [ ] Support pagination
