@@ -9,6 +9,9 @@
     "build": "parcel build demo/static/src/* -d demo/static/dist/ --public-url /static/dist/",
     "dev": "concurrently npm:parcel npm:runserver"
   },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -20,8 +23,9 @@
     "axios": "^0.19.2",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
+    "lodash": "^4.17.15",
     "parcel-bundler": "^1.12.4",
-    "popper.js": "^1.16.1",
+    "popper.js": "^1.16.0",
     "portal-vue": "^2.1.7",
     "sass": "^1.25.0",
     "tailwindcss": "^1.1.4",

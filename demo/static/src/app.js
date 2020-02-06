@@ -11,21 +11,28 @@ Vue.config.productionTip = false;
 
 Vue.use(InertiaApp);
 Vue.use(PortalVue);
+
 Vue.mixin({ methods: { route: window.reverseUrl } });
 
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script
 const page = JSON.parse(document.getElementById("page").textContent);
+
 import Index from "./Pages/Index";
+import Contacts from "./Pages/Contacts";
 
 const pages = {
-  'Index': Index
+  'Index': Index,
+  'Contacts': Contacts,
 }
+
+
 new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: page,
       resolveComponent: (name) => {
+        console.log("resolveComponent ", name)
         return pages[name];
       },
     },

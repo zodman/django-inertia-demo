@@ -6,12 +6,13 @@ from django.views.generic.detail import BaseDetailView
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.middleware import csrf
-from .share import shared_props
+from .share import share
 from .version import asset_version
 
 from django.views.generic import View
 from django.conf import settings
 from django.core import serializers
+from django.forms.models import model_to_dict
 
 
 
@@ -23,7 +24,6 @@ def _build_context(component_name, props, version, url):
             "component": component_name,
             "props": props
         },
-        
     }
 
     return context
@@ -50,15 +50,15 @@ def render_inertia(request, component_name, props=None, template_name=None):
 
     if props is None:
         props = {}
-
     shared = {}
-    for key, value in shared_props.items():
-        if callable(value):
-            shared[key] = value(request)
-        else:
-            shared[key] = value
+    for k, v in request.session.get("share",{}).items():
+        shared[k]=v
 
+    
     props.update(shared)
+
+    del request.session["share"]
+    
 
     # subsequent renders
     if ('x-inertia' in request.headers and
@@ -84,24 +84,11 @@ class InertiaMixin():
     component_name = ""
     props = None
     template_name = None
-    serializer_class = serializers.get_serializer("json")
-
-    def render_to_response(self, context):
-        if self.serializer_class is None:
-            raise ImproperlyConfigured(
-                "%(cls)s is missing a ModelSerializer. Define "
-                "%(cls)s.serializer_class." % {
-                    'cls': self.__class__.__name__
-                }
-            )
-
-        
-        
-        object_name = self.get_context_object_name(self.object)
-        serialized_object = self.serializer_class().serialize(self.object).getvalue()
-
-        assert False, serialized_object
-
+    
+    def render_to_response(self, context):         
+        serialized_object = self.get_serialized_object()
+        object_name = self.get_object_name()
+    
         if self.props is None:
             self.props = {object_name: serialized_object}
         else:
@@ -114,12 +101,23 @@ class InertiaDetailView(InertiaMixin, BaseDetailView):
     """
     Similiar to Djangos DetailView, but with Inertia templates.
     """
+    def get_serialized_object(self):
+        return model_to_dict(self.object)
+        
+
+    def get_object_name(self):
+        object_name = self.get_context_object_name(self.object)
+        return obj_name
 
 
 class InertiaListView(InertiaMixin, BaseListView):
     """
     Similiar to Djangos ListView, but with Inertia templates.
     """
+    def get_serialized_object(self):    
+        obj = list(self.object_list.values())
+        return obj
 
-    def render_to_response(self, context):
-        return super().render_to_response(context, True)
+    def get_object_name(self): 
+        object_name = self.get_context_object_name(self.object_list)
+        return object_name

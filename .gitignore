@@ -126,3 +126,4 @@ node_modules
 demo/static/dist
 
 .vscode
+.__*

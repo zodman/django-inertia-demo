@@ -41,9 +41,11 @@
         </div>
         <div class="flex flex-grow overflow-hidden">
           <main-menu :url="url()" class="bg-indigo-800 flex-shrink-0 w-56 p-12 hidden md:block overflow-y-auto" />
-          <div class="flex-1 overflow-hidden px-4 py-8 md:p-12 overflow-y-auto" scroll-region>
+          <div class="flex-1 overflow-hidden px-4 py-8 md:p-12 overflow-y-auto">
+            
             <flash-messages />
             <slot />
+            
           </div>
         </div>
       </div>
@@ -68,7 +70,7 @@ export default {
   },
   data() {
     return {
-      showUserMenu: false,
+      showUserMenu: true,
       accounts: null,
     }
   },
