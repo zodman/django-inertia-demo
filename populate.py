@@ -6,10 +6,14 @@ django.setup()
 from django_seed import Seed
 from demo.models import Contact, Organization
 
+Contact.objects.all().delete()
+Organization.objects.all().delete()
 
 fake = Seed.seeder()
 
-fake.add_entity(Organization, 80)
+fake.add_entity(Organization, 80, {
+    'name': lambda x: fake.faker.company(),
+})
 fake.add_entity(Contact, 80)
 
 print("execute")
