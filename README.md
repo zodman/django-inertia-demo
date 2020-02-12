@@ -25,7 +25,7 @@ npm run dev
 
 ### Contacts
 - [X] List
-- [ ] Support pagination
+- [X] Support pagination
 - [ ] filter contacts
 - [ ] Edit contact
 - [ ] Create contact
