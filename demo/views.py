@@ -22,7 +22,7 @@ def _get_objs(request, objects, fields, url_name):
         objs = list(page_obj.object_list.values(*fields))
     except EmptyPage:
         objs = []
-    
+
     if page_obj.has_previous():
         prev_page_num = page_obj.previous_page_number()
         links.append({'url': "{}?page={}".format(reverse(url_name), prev_page_num),
@@ -43,19 +43,26 @@ def organizations(request):
         'filters':{},
         'organizations':{
             'links':links,
-            'data':objs     
-        }        
+            'data':objs
+        }
     }
     return render_inertia(request, "Organization", props)
 
 
 def contacts(request):
     objects = Contact.objects.all()
+    search =  request.GET.get("search")
+    if search:
+        objects = objects.filter(first_name__icontains=search)
     args = ("id","organization__name", "first_name", "last_name",'city','phone')
     objs, links = _get_objs(request, objects, args, "demo:contacts")
     props = {
         'links':links,
-        'contact_list': objs            
+        'contact_list': objs,
+        'filters': {
+                'search':"",
+                'trashed':"",
+                   }
     }
     return render_inertia(request, "Contacts", props)
 

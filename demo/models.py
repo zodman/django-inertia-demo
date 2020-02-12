@@ -15,12 +15,18 @@ class EntityMix(models.Model):
 class Organization(EntityMix):
     name = models.CharField(max_length=100)
 
-    
+    class Meta:
+        ordering = ("name",)
+
+
 
 class Contact(EntityMix):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="contacts")
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ("first_name", "last_name")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

@@ -89,8 +89,8 @@ export default {
   data() {
     return {
       form: {
-        search: "", //this.filters.search,
-        trashed: ""//this.filters.trashed,
+        search: this.filters.search,
+        trashed: this.filters.trashed,
       },
     }
   },
@@ -98,7 +98,10 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.route('demo:contacts', Object.keys(query).length ? query : { remember: 'forget' }))
+        let url = this.route('demo:contacts') + "?";
+        url += Object.keys(query).length ? "&search=" + query.search : "&remember=true" 
+        console.log("url", url);
+        this.$inertia.replace(url)
       }, 150),
       deep: true,
     },
