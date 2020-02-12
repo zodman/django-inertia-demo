@@ -65,14 +65,14 @@ def render_inertia(request, component_name, props=None, template_name=None):
             "component": component_name,
             "props": props,
             "version": asset_version.get_version(),
-            "url": request.path
+            "url": request.get_full_path()
         })
 
         response['X-Inertia'] = True
         response['Vary'] = 'Accept'
         return response
     context = _build_context(component_name, props,
-                             asset_version.get_version(), url=request.path)
+                             asset_version.get_version(), url=request.get_full_path())
 
     return render(request, inertia_template, context)
 
@@ -81,7 +81,7 @@ class InertiaMixin:
     props = None
 
     def get_data(self, context):
-        
+
         return context
         
 

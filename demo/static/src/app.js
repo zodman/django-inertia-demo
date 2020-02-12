@@ -20,10 +20,12 @@ const page = JSON.parse(document.getElementById("page").textContent);
 
 import Index from "./Pages/Index";
 import Contacts from "./Pages/Contacts";
+import Organization from "./Pages/Organizations";
 
 const pages = {
   'Index': Index,
   'Contacts': Contacts,
+  'Organization': Organization
 }
 
 

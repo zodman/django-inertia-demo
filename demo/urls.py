@@ -1,6 +1,6 @@
 
 from django.urls import path
-from demo.views import index , contacts
+from demo.views import index , contacts,organizations
 
 app_name="demo"
 
@@ -12,7 +12,9 @@ urlpatterns = [
     path('contacts/edit/<int:id>', index, name='contacts.edit'),
     path('contacts/create/', index, name='contacts.create'),
     path('reports', index, name='reports'),
-    path('organizations', index, name='organizations'),
+    path('organizations/edit/<int:id>', organizations, name='organizations.edit'),
+    path('organizations/create/', organizations, name='organizations.create'),
+    path('organizations', organizations, name='organizations'),
     path('dashboard', index, name='dashboard'),
     path('contacts', contacts, name='contacts'),
     path('', index, name='index'),
