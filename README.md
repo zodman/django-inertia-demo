@@ -12,8 +12,12 @@ pip install -r requirements.txt
 npm install
 python manage.py migrate
 python populate.py 
+python manage.py createsuperuser
 npm run dev
 ```
+
+*Login with admin users plz*
+
 
 
 ## TODO
