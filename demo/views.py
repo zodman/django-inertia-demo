@@ -37,10 +37,16 @@ def _get_objs(request, objects, fields, url_name):
 
 def organizations(request):
     objects = Organization.objects.all()
+    search =  request.GET.get("search", "")
+    if search:
+        objects = objects.filter(name__icontains=search)
     args = ("id","name", 'state','city','phone')
     objs, links = _get_objs(request, objects, args,"demo:organizations")
     props = {
-        'filters':{},
+        'filters': {
+                'search':search,
+                'trashed':"",
+                   },
         'organizations':{
             'links':links,
             'data':objs
@@ -51,7 +57,7 @@ def organizations(request):
 
 def contacts(request):
     objects = Contact.objects.all()
-    search =  request.GET.get("search")
+    search =  request.GET.get("search", "")
     if search:
         objects = objects.filter(first_name__icontains=search)
     args = ("id","organization__name", "first_name", "last_name",'city','phone')
@@ -60,7 +66,7 @@ def contacts(request):
         'links':links,
         'contact_list': objs,
         'filters': {
-                'search':"",
+                'search':search,
                 'trashed':"",
                    }
     }
