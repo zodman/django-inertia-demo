@@ -58,7 +58,7 @@
         </tr>
       </table>
     </div>
-    <pagination :links="contact_list.links" />
+    <pagination :links="links" />
   </div>
 </template>
 
@@ -84,6 +84,7 @@ export default {
   props: {
     contact_list: Array,
     filters: Object,
+    links: Array,
   },
   data() {
     return {

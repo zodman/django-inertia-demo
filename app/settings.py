@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'demo',
     'js_routes',
     'inertia',
+    'django_seed',
 ]
 
 MIDDLEWARE = [

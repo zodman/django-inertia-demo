@@ -7,7 +7,8 @@
     "runserver": "cross-env PYTHONUNBUFFERED=1 python manage.py runserver",
     "parcel": "parcel watch demo/static/src/* -d demo/static/dist/ --public-url /static/dist/",
     "build": "parcel build demo/static/src/* -d demo/static/dist/ --public-url /static/dist/",
-    "dev": "concurrently npm:parcel npm:runserver"
+    "dev": "concurrently npm:parcel npm:runserver",
+    "test_django": "python manage.py test"
   },
   "posthtml": {
     "recognizeSelfClosing": true
