@@ -2,7 +2,7 @@
 
 @inertiajs/inertia-vue+parcel+django
 
-![](https://i.imgur.com/2OYnxPb.png)
+![](https://i.imgur.com/N2RAfQN.png)
 
 
 ### For run
