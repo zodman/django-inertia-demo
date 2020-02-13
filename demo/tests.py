@@ -1,5 +1,4 @@
-from django.test import TestCase
-from django.test import Client
+from test_plus.test import TestCase
 from django_seed import Seed
 from django.urls import reverse
 from .models import Contact, Organization
@@ -14,8 +13,8 @@ class DemoTestCase(TestCase):
         seeder.add_entity(Contact, 80)
 
     def test_contacts(self):
-        self.client = Client()
-        response = self.client.get(reverse("demo:contacts"))
-        self.assertEqual(200, response.status_code)
+        self.get_check_200("demo:dashboard")
+        self.get_check_200("demo:contacts")
+        self.get_check_200("demo:organizations")
 
     

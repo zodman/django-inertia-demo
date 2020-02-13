@@ -2,3 +2,4 @@ Django
 django-js-routes
 django-seed
 django-rest-framework
+django-test-plus
