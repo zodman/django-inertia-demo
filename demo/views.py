@@ -13,7 +13,7 @@ def organizations(request):
     search =  request.GET.get("search", "")
     if search:
         objects = objects.filter(name__icontains=search)
-    args = ("id","name", 'state','city','phone')
+    args = ("id","name", 'region','city','phone')
     objs, links = _get_objs(request, objects, args,"demo:organizations")
     props = {
         'filters': {

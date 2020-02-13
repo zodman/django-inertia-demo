@@ -16,7 +16,7 @@ python manage.py createsuperuser
 npm run dev
 ```
 
-*Login with admin users plz*
+*Login with admin user plz*
 
 
 
