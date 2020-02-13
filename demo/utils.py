@@ -11,7 +11,7 @@ def share_flash(request, success=False, error=False, errors = []):
 
 
 def _get_objs(request, objects, fields, url_name):
-    p = Paginator(objects, 10)
+    p = Paginator(objects, 5)
     page_number = request.GET.get('page', 1)
     links = []
     try:

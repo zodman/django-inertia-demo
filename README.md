@@ -2,8 +2,8 @@
 
 @inertiajs/inertia-vue+parcel+django
 
-![](https://i.imgur.com/N2RAfQN.png)
-
+![](https://i.imgur.com/9vQ1pzV.png)
+![](https://i.imgur.com/0GbJBwU.png)
 
 ### For run
 

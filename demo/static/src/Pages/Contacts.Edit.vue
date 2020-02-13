@@ -24,9 +24,9 @@
           <text-input v-model="form.region" :errors="$page.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :errors="$page.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
-            <option value="MX">Mexico</option>
-            <option value="CA">Canada</option>
-            <option value="US">United States</option>
+            <option value="mx">Mexico</option>
+            <option value="ca">Canada</option>
+            <option value="us">United States</option>
           </select-input>
           <text-input v-model="form.postal_code" :errors="$page.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
