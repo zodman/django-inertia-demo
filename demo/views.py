@@ -5,46 +5,8 @@ from .models import Contact, Organization
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
-
-
-def share_flash(request, success=False, error=False, errors = []):
-    share(request, "flash",{'success':success,'error':error})
-    if errors:
-        share(request, "errors",errors)
-
-
-def _get_objs(request, objects, fields, url_name):
-    p = Paginator(objects, 10)
-    page_number = request.GET.get('page', 1)
-    links = []
-    try:
-        page_obj = p.get_page(page_number)
-        objs = list(page_obj.object_list.values(*fields))
-    except EmptyPage:
-        objs = []
-        page_obj = None
-
-    if page_obj:
-        if page_obj.has_previous():
-            prev_page_num = page_obj.previous_page_number()
-            links.append({'url': "{}?page={}".format(reverse(url_name), prev_page_num),
-                            'label': 'Prev'})
-        for i in p.page_range:
-            active=False
-            if int(page_number) == i:
-                active =True
-            
-            links.append({'url': "{}?page={}".format(reverse(url_name), i),
-                          'active':active,
-                                'label': i})
-
-        if page_obj.has_next():
-            next_page_num = page_obj.next_page_number()
-            links.append({'url': "{}?page={}".format(reverse(url_name), next_page_num),
-                          'label': 'Next'})
-    return objs, links
-
-
+from .utils import _get_objs, share_flash
+from django.forms import model_to_dict
 
 def organizations(request):
     objects = Organization.objects.all()
@@ -82,6 +44,19 @@ def contacts(request):
                    }
     }
     return render_inertia(request, "Contacts", props)
+
+def contact_edit(request, id):
+    contact = Contact.objects.get(id=id)
+    orgs = list(Organization.objects.all().values('id','name'))
+    contact = model_to_dict(contact)
+    contact.update({"organization_id": contact["organization"]})
+    props = {
+        'contact': contact,
+        'organizations': orgs, 
+    }
+    return render_inertia(request, "Contacts.Edit", props)
+
+
 
 def index(request):
     # share_flash(request, errors=["yeah",])

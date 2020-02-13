@@ -1,6 +1,7 @@
 
 from django.urls import path
 from demo.views import index , contacts,organizations
+from demo.views import contact_edit
 
 app_name="demo"
 
@@ -9,7 +10,7 @@ urlpatterns = [
     path('users/', index, name='users'),
     path('users/logout', index, name='logout'),
     path('users/edit/<int:id>', index, name='users.edit'),
-    path('contacts/edit/<int:id>', index, name='contacts.edit'),
+    path('contacts/edit/<int:id>', contact_edit, name='contacts.edit'),
     path('contacts/create/', index, name='contacts.create'),
     path('contacts', contacts, name='contacts'),
     path('reports', index, name='reports'),

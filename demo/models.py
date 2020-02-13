@@ -3,10 +3,13 @@ from django.db import models
 
 class EntityMix(models.Model):
     email = models.EmailField()
-    phone = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    state= models.CharField(max_length=100)
+    phone = models.CharField(max_length=50)
+    address = models.CharField(max_length=150)
+    city = models.CharField(max_length=50)
+    region= models.CharField(max_length=50)
+    country = models.CharField(max_length=2)
+    postal_code = models.CharField(max_length=25)
+    deleted = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
