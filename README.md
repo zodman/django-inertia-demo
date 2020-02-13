@@ -1,5 +1,7 @@
 # django-intertia-demo
 
+[![Build Status](https://travis-ci.org/zodman/django-inertia-demo.svg?branch=master)](https://travis-ci.org/zodman/django-inertia-demo)
+
 @inertiajs/inertia-vue+parcel+django
 
 ![](https://i.imgur.com/9vQ1pzV.png)
