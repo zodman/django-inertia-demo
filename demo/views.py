@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
 from .utils import _get_objs, share_flash
 from django.forms import model_to_dict
-from .serializers import ContactSchema
+from .serializers import ContactSchema, OrganizationSchema
 
 def organizations(request):
     objects = Organization.objects.all()
@@ -51,11 +51,11 @@ def contacts(request):
 def contact_edit(request, id):
     contact = Contact.objects.get(id=id)
     c = ContactSchema()
-    orgs = list(Organization.objects.all().values('id','name'))
-    
+    org_schema = OrganizationSchema(many=True, only=("id","name"))
+    orgs = Organization.objects.all()
     props = {
         'contact': c.dump(contact),
-        'organizations': orgs, 
+        'organizations': org_schema.dump(orgs), 
     }
     return render_inertia(request, "Contacts.Edit", props)
 

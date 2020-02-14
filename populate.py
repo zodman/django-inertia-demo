@@ -13,8 +13,11 @@ fake = Seed.seeder()
 
 fake.add_entity(Organization, 80, {
     'name': lambda x: fake.faker.company(),
+    'country': lambda x: fake.faker.random_element(elements=('CA', 'MX', 'US')
 })
-fake.add_entity(Contact, 80)
+fake.add_entity(Contact, 80, {
+    'country': lambda x: fake.faker.random_element(elements=('CA', 'MX', 'US'))
+})
 
 print("execute")
 fake.execute()

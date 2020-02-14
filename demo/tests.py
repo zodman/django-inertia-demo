@@ -19,7 +19,6 @@ class DemoTestCase(TestCase):
         self.get_check_200("demo:contacts")
         self.get_check_200("demo:organizations")
 
-
     def test_contact_serializer(self):
         contact_schema = ContactSchema()
         contact = Contact.objects.last()

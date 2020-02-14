@@ -7,7 +7,8 @@ class BaseSchema(Schema):
     address = fields.Str()
     city = fields.Str()
     region = fields.Str()
-    postcode = fields.Str()    
+    postal_code = fields.Str()    
+    country = fields.Str() 
 
 class OrganizationSchema(BaseSchema):
     name = fields.Str()
