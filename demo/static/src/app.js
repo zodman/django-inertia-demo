@@ -32,7 +32,6 @@ const pages = {
 }
 
 
-
 new Vue({
   render: h => h(InertiaApp, {
     props: {

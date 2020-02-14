@@ -8,6 +8,7 @@ from django.urls import reverse
 from .utils import _get_objs, share_flash
 from django.forms import model_to_dict
 from .serializers import ContactSchema, OrganizationSchema
+import json
 
 def organizations(request):
     objects = Organization.objects.all()
@@ -46,16 +47,22 @@ def contacts(request):
     }
     return render_inertia(request, "Contacts", props)
 
-
+from marshmallow import  INCLUDE
 
 def contact_edit(request, id):
     contact = Contact.objects.get(id=id)
     c = ContactSchema()
     org_schema = OrganizationSchema(many=True, only=("id","name"))
     orgs = Organization.objects.all()
+
+    if request.method == "POST":
+        data = c.load(json.loads(request.body), unknown=INCLUDE)
+        Contact.objects.filter(id=id).update(**data)
+        share_flash(request,success="Contact updated")
+
     props = {
         'contact': c.dump(contact),
-        'organizations': org_schema.dump(orgs), 
+        'organizations': org_schema.dump(orgs)
     }
     return render_inertia(request, "Contacts.Edit", props)
 
