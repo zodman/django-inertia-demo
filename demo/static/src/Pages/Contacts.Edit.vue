@@ -84,7 +84,7 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      this.$inertia.put(this.route('demo:contacts.update', this.contact.id), this.form)
+      this.$inertia.post(this.route('demo:contacts.edit', this.contact.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {

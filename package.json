@@ -13,8 +13,11 @@
   "posthtml": {
     "recognizeSelfClosing": true
   },
-   "watchreload": {
-           "files": ["**/*.py", "**/templates/**/*.html"]
+  "watchreload": {
+    "files": [
+      "**/*.py",
+      "**/templates/**/*.html"
+    ]
   },
   "author": "",
   "license": "ISC",
