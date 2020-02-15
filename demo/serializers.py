@@ -1,4 +1,6 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, validate
+
+
 
 class BaseSchema(Schema):
     id = fields.Int()
@@ -14,7 +16,7 @@ class OrganizationSchema(BaseSchema):
     name = fields.Str()
 
 class ContactSchema(BaseSchema):
-    first_name = fields.Str()
-    last_name = fields.Str()
+    first_name = fields.Str(validate=validate.Length(min=1))
+    last_name = fields.Str(validate=validate.Length(min=1))
     organization = fields.Nested(OrganizationSchema)
     organization_id = fields.Function(lambda o: o.organization.id)

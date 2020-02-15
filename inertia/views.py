@@ -14,7 +14,9 @@ from django.views.generic import View
 from django.conf import settings
 from django.core import serializers
 from django.forms.models import model_to_dict
+import logging
 
+log = logging.getLogger(__name__)
 
 
 def _build_context(component_name, props, version, url):
@@ -52,10 +54,16 @@ def render_inertia(request, component_name, props=None, template_name=None):
     if props is None:
         props = {}
     shared = {}
+
     for k, v in request.session.get("share",{}).items():
         shared[k]=v
     props.update(shared)
-    del request.session["share"]
+
+    for key in ("success","error","errors"):
+        if  request.session.get(key):
+            del request.session[key]
+    
+    #del request.session["share"]
     
     # subsequent renders
     if ('x-inertia' in request.headers and

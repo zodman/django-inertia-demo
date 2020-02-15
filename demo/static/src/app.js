@@ -31,7 +31,6 @@ const pages = {
   'Contacts.Edit': ContactEdit,
 }
 
-
 new Vue({
   render: h => h(InertiaApp, {
     props: {

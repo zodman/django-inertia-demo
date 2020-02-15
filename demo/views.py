@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from inertia.views import render_inertia, InertiaMixin
 from inertia.share import share
 from .models import Contact, Organization
@@ -47,7 +47,7 @@ def contacts(request):
     }
     return render_inertia(request, "Contacts", props)
 
-from marshmallow import  INCLUDE
+from marshmallow import  INCLUDE, ValidationError 
 
 def contact_edit(request, id):
     contact = Contact.objects.get(id=id)
@@ -56,9 +56,16 @@ def contact_edit(request, id):
     orgs = Organization.objects.all()
 
     if request.method == "POST":
-        data = c.load(json.loads(request.body), unknown=INCLUDE)
-        Contact.objects.filter(id=id).update(**data)
-        share_flash(request,success="Contact updated")
+        data= json.loads(request.body)
+        try:
+            data_serialized = c.load(data, unknown=INCLUDE)
+        except ValidationError  as err:
+            share_flash(request, error="Exists errors on form")
+            share_flash(request, errors= err.messages)
+        else:
+            Contact.objects.filter(id=id).update(**data)
+            share_flash(request, success="Updated contact")
+            return redirect(reverse("demo:contacts"))
 
     props = {
         'contact': c.dump(contact),

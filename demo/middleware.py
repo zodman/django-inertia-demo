@@ -22,7 +22,22 @@ class DemoMiddleware:
                         'email': request.user.email,
                     }
                 })
-        share(request, "flash", {'success':False,'error':False})
-        share(request, 'errors',[])
+        else:
+            share(request, 'auth', {
+                    'user':{
+                        'account':{
+                            'id':"request.user.id",
+                            'name':"request.user.username",
+                        },
+                        'id': "request.user.id",
+                        'firt_name': "request.user.first_name",
+                        'last_name': "request.user.last_name",
+                        'email': "request.user.email",
+                    }
+                })
+        
+        share(request, "flash", {'success':request.session.get("success",False),
+                                 'error':request.session.get("error", False)})
+        share(request, 'errors', request.session.get("errors",[]) )
         response = self.get_response(request)
         return response
