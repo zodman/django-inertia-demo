@@ -4,12 +4,6 @@ from django.urls import reverse
 
 
 
-def share_flash(request, success=False, error=False, errors = []):
-    share(request, "flash",{'success':success,'error':error})
-    if errors:
-        share(request, "errors",errors)
-
-
 def _get_objs(request, objects, fields, url_name):
     p = Paginator(objects, 5)
     page_number = request.GET.get('page', 1)

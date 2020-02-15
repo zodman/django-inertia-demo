@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from inertia.views import render_inertia, InertiaMixin
-from inertia.share import share
+from inertia.share import share, share_flash
 from .models import Contact, Organization
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
-from .utils import _get_objs, share_flash
+from .utils import _get_objs
 from django.forms import model_to_dict
 from .serializers import ContactSchema, OrganizationSchema
 import json
