@@ -2,7 +2,7 @@ from test_plus.test import TestCase
 from django_seed import Seed
 from django.urls import reverse
 from .models import Contact, Organization
-from .serializers import ContactSchema
+from .serializers import ContactSchema, OrganizationSchema
 
 
 class DemoTestCase(TestCase):
@@ -23,8 +23,17 @@ class DemoTestCase(TestCase):
         contact_schema = ContactSchema()
         contact = Contact.objects.last()
         s = contact_schema.dump(contact)
-        
         self.assertTrue(s["organization_id"], contact.organization.id)
 
+    def test_org_serializer(self):
+        org_schema = OrganizationSchema()
+        org = Organization.objects.last()
+        r = org_schema.dump(org)
+        self.assertTrue( "contacts" in r, r)
+        self.assertTrue(len(r["contacts"])>0)
 
-    
+    def __test_flash(self):
+        contact = Contact.objects.last()
+        self.get_check_200("demo:contact.edit", id=contact.id)
+        self.delete("demo:contact.edit", id=contact.id)
+        self.response_301()

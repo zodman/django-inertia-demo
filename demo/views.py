@@ -5,45 +5,54 @@ from .models import Contact, Organization
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
-from .utils import _get_objs
+from .utils import _get_objs, _filter
 from django.forms import model_to_dict
 from .serializers import ContactSchema, OrganizationSchema
 import json
 from marshmallow import  INCLUDE, ValidationError
 
+
+def organization_edit(request, id):
+    organization = Organization.objects.get(id=id)
+    schema = OrganizationSchema()
+    props = {
+        'organization': schema.dump(organization)
+    }
+    return render_inertia(request, "Organizations.Edit", props)
+
+
 def organizations(request):
+    org_sche = OrganizationSchema(many=True)
     objects = Organization.objects.all()
-    search =  request.GET.get("search", "")
-    if search:
-        objects = objects.filter(name__icontains=search)
+    _filter(request, objects, "name__icontains")
     args = ("id","name", 'region','city','phone')
     objs, links = _get_objs(request, objects, args,"demo:organizations")
+    trashed = request.GET.get("trashed","")
+    search =  request.GET.get("search", "")
     props = {
         'filters': {
                 'search':search,
-                'trashed':"",
+                'trashed':trashed,
                    },
         'organizations':{
             'links':links,
-            'data':objs
+            'data': org_sche.dump(objs)
         }
     }
-    return render_inertia(request, "Organization", props)
+    return render_inertia(request, "Organizations", props)
 
 
 def contacts(request):
     objects = Contact.objects.all()
+    objects = _filter(request, objects, "first_name__icontains")
     trashed = request.GET.get("trashed","")
-    if trashed == "with":
-        objects = objects.filter(deleted=True)
     search =  request.GET.get("search", "")
-    if search != "" and search !="undefined":
-        objects = objects.filter(first_name__icontains=search)
     args = ("id","organization__name", "first_name", "last_name",'city','phone')
     objs, links = _get_objs(request, objects, args, "demo:contacts")
+    contact_schema = ContactSchema(many=True)
     props = {
         'links':links,
-        'contact_list': objs,
+        'contact_list': contact_schema.dump(objs),
         'filters': {
             'search':search,
             'trashed':trashed,

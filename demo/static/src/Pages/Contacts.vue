@@ -27,13 +27,13 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('demo:contacts.edit', contact.id)">
               {{ contact.first_name }} {{contact.last_name}}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              <icon v-if="contact.deleted" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('demo:contacts.edit', contact.id)" tabindex="-1">
-              <div v-if="contact.organization__name">
-                {{ contact.organization__name }}
+              <div v-if="contact.organization.name">
+                {{ contact.organization.name }}
               </div>
             </inertia-link>
           </td>

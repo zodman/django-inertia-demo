@@ -1,4 +1,6 @@
+import logging
 
+log = logging.getLogger(__name__)
 
 def share(request, key, value):
     request.session.setdefault("share",{})
@@ -14,7 +16,7 @@ def share_flash(request, success=False, error=False, errors=False):
     if errors:
         request.session["error"] = errors
 
-    print(("share", success, error, errors))
+    log.info(("share", success, error, errors))
     share(request, "flash",{'success':success,'error':error})
     if errors:
         share(request, "errors",errors)

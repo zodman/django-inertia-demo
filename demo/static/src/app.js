@@ -22,13 +22,14 @@ import Index from "./Pages/Index";
 import Contacts from "./Pages/Contacts";
 import Organization from "./Pages/Organizations";
 import ContactEdit from "./Pages/Contacts.Edit";
-
+import OrganizationEdit from "./Pages/Organizations.Edit";
 
 const pages = {
   'Index': Index,
   'Contacts': Contacts,
-  'Organization': Organization,
   'Contacts.Edit': ContactEdit,
+  'Organizations': Organization,
+  "Organizations.Edit": OrganizationEdit,
 }
 
 new Vue({

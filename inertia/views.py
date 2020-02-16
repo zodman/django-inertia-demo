@@ -56,7 +56,7 @@ def render_inertia(request, component_name, props=None, template_name=None):
     shared = {}
 
     for k, v in request.session.get("share",{}).items():
-        print((k,v))
+        log.debug((k,v))
         shared[k]=v
     props.update(shared)
 

@@ -3,6 +3,16 @@ from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
 
 
+def _filter(request, objects, filter_param):
+    trashed = request.GET.get("trashed","")
+    if trashed == "with":
+        objects = objects.filter(deleted=True)
+    search =  request.GET.get("search", "")
+    if search != "" and search !="undefined":
+        d = {filter_param: search}
+        objects = objects.filter(**d)
+    return objects
+
 
 def _get_objs(request, objects, fields, url_name):
     p = Paginator(objects, 5)
@@ -10,7 +20,7 @@ def _get_objs(request, objects, fields, url_name):
     links = []
     try:
         page_obj = p.get_page(page_number)
-        objs = list(page_obj.object_list.values(*fields))
+        objs = page_obj.object_list
     except EmptyPage:
         objs = []
         page_obj = None
