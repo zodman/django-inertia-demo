@@ -10,4 +10,3 @@ script:
   - coverage run python manage.py test
 after_success:
   - coverage report
-  - coveralls
