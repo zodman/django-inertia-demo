@@ -99,7 +99,7 @@ export default {
       handler: throttle(function() {
         let query = pickBy(this.form)
         let url = this.route('demo:contacts') + "?";
-        url += Object.keys(query).length ? "&search=" + query.search : "&remember=true" 
+        url += Object.keys(query).length ? "&search=" + query.search + "&trashed=" + query.trashed : "&remember=true" 
         console.log("url", url);
         this.$inertia.replace(url)
       }, 150),

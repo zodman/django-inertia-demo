@@ -90,7 +90,7 @@ export default {
     },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
-        this.$inertia.delete(this.route('demo:contacts.destroy', this.contact.id))
+        this.$inertia.delete(this.route('demo:contacts.edit', this.contact.id))
       }
     },
     restore() {

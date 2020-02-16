@@ -9,6 +9,7 @@ from .utils import _get_objs
 from django.forms import model_to_dict
 from .serializers import ContactSchema, OrganizationSchema
 import json
+from marshmallow import  INCLUDE, ValidationError
 
 def organizations(request):
     objects = Organization.objects.all()
@@ -32,8 +33,11 @@ def organizations(request):
 
 def contacts(request):
     objects = Contact.objects.all()
+    trashed = request.GET.get("trashed","")
+    if trashed == "with":
+        objects = objects.filter(deleted=True)
     search =  request.GET.get("search", "")
-    if search:
+    if search != "" and search !="undefined":
         objects = objects.filter(first_name__icontains=search)
     args = ("id","organization__name", "first_name", "last_name",'city','phone')
     objs, links = _get_objs(request, objects, args, "demo:contacts")
@@ -41,13 +45,12 @@ def contacts(request):
         'links':links,
         'contact_list': objs,
         'filters': {
-                'search':search,
-                'trashed':"",
-                   }
+            'search':search,
+            'trashed':trashed,
+       }
     }
     return render_inertia(request, "Contacts", props)
 
-from marshmallow import  INCLUDE, ValidationError 
 
 def contact_edit(request, id):
     contact = Contact.objects.get(id=id)
@@ -66,6 +69,13 @@ def contact_edit(request, id):
             Contact.objects.filter(id=id).update(**data)
             share_flash(request, success="Updated contact")
             return redirect(reverse("demo:contacts"))
+    if request.method == "DELETE":
+        contact.deleted = True
+        contact.save()
+        share_flash(request, success="Contact Deleted")
+        return redirect(reverse("demo:contacts"))
+
+
 
     props = {
         'contact': c.dump(contact),
