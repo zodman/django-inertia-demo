@@ -10,14 +10,18 @@ Contact.objects.all().delete()
 Organization.objects.all().delete()
 
 fake = Seed.seeder()
-
-fake.add_entity(Organization, 80, {
+args = {
+    'country': lambda x: fake.faker.random_element(elements=('CA', 'US')),
+    'region': lambda x:fake.faker.state(),
+    'address': lambda x:fake.faker.address().replace("\n"," "),
+    'postal_code': lambda x:fake.faker.postalcode(),
+}
+org_args = args.copy()
+org_args.update({
     'name': lambda x: fake.faker.company(),
-    'country': lambda x: fake.faker.random_element(elements=('CA', 'MX', 'US'))
 })
-fake.add_entity(Contact, 80, {
-    'country': lambda x: fake.faker.random_element(elements=('CA', 'MX', 'US'))
-})
+fake.add_entity(Organization, 80,org_args) 
+fake.add_entity(Contact, 80, args)
 
 print("execute")
 fake.execute()
