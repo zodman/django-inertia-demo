@@ -34,12 +34,12 @@ def _build_context(component_name, props, version, url):
 
 def render_inertia(request, component_name, props=None, template_name=None):
     """
-    Renders either an HttpRespone or JsonResponse of a component for 
+    Renders either an HttpRespone or JsonResponse of a component for
     the use in an InertiaJS frontend integration.
     """
     inertia_template = None
 
-    
+
     inertia_template = getattr(settings, "INERTIA_TEMPLATE", "base.html")
 
     if template_name is not None:
@@ -56,15 +56,16 @@ def render_inertia(request, component_name, props=None, template_name=None):
     shared = {}
 
     for k, v in request.session.get("share",{}).items():
+        print((k,v))
         shared[k]=v
     props.update(shared)
 
     for key in ("success","error","errors"):
         if  request.session.get(key):
             del request.session[key]
-    
+
     #del request.session["share"]
-    
+
     # subsequent renders
     if ('x-inertia' in request.headers and
         'x-inertia-version' in request.headers and
@@ -91,11 +92,11 @@ class InertiaMixin:
     def get_data(self, context):
 
         return context
-        
 
-    def render_to_response(self, context, **kwargs):         
+
+    def render_to_response(self, context, **kwargs):
         if self.props is None:
             self.props = {}
         self.props.update(self.get_data(context))
         return render_inertia(self.request, self.component_name, self.props, self.template_name)
-    
+
