@@ -15,7 +15,7 @@ def _filter(request, objects, filter_param):
 
 
 def _get_objs(request, objects, fields, url_name):
-    p = Paginator(objects, 5)
+    p = Paginator(objects, 20)
     page_number = request.GET.get('page', 1)
     links = []
     try:
