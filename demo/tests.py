@@ -30,7 +30,6 @@ class DemoTestCase(TestCase):
         org = Organization.objects.last()
         r = org_schema.dump(org)
         self.assertTrue( "contacts" in r, r)
-        self.assertTrue(len(r["contacts"])>0)
 
     def __test_flash(self):
         contact = Contact.objects.last()
