@@ -163,7 +163,7 @@ def logout_view(request):
     return redirect(reverse("demo:login"))
 
 def login_view(request):
-    errors = {}
+    errors = {'email':[]}
     if request.user.is_authenticated:
         return redirect(reverse("demo:dashboard"))
 
