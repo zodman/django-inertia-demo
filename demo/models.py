@@ -34,7 +34,9 @@ class Contact(EntityMix):
 
     class Meta:
         ordering = ("first_name", "last_name")
-
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

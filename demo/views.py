@@ -92,6 +92,26 @@ def contact_edit(request, id):
     }
     return render_inertia(request, "Contacts.Edit", props)
 
+def contact_create(request):
+    contact_schema = ContactSchema()
+    org_schema = OrganizationSchema(many=True, only=("id","name"))
+    orgs = Organization.objects.all()
+
+    if request.method == "POST":
+        try:
+            c = contact_schema.loads(request.body,  unknown=INCLUDE)
+            obj = Contact.objects.create(**c)
+        except ValidationError as err:
+            share_flash(request, error="Exists errors on form")
+            print(err)
+            share_flash(request, errors= err.messages)
+        else:
+            share_flash(request, success=f"Contact {obj.name} created")
+            return redirect(reverse("demo:contacts"))
+    props = {
+        'organizations': org_schema.dump(orgs)
+    }
+    return render_inertia(request, "Contacts.Create", props)
 
 
 def index(request):
