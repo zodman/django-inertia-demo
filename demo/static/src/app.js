@@ -24,6 +24,9 @@ import Organization from "./Pages/Organizations";
 import ContactEdit from "./Pages/Contacts.Edit";
 import OrganizationEdit from "./Pages/Organizations.Edit";
 import ContactCreate from "./Pages/Contacts.Create";
+import OrganizationCreate from "./Pages/Organizations.Create";
+
+
 const pages = {
   'Index': Index,
   'Contacts': Contacts,
@@ -31,8 +34,9 @@ const pages = {
   'Contacts.Create': ContactCreate,
   'Organizations': Organization,
   "Organizations.Edit": OrganizationEdit,
-  
+  "Organizations.Create": OrganizationCreate
 }
+
 
 new Vue({
   render: h => h(InertiaApp, {

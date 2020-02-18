@@ -12,13 +12,30 @@ import json
 from marshmallow import  INCLUDE, ValidationError
 
 
+def organization_create(request):
+    props = {}
+    org_schema = OrganizationSchema()
+
+    if request.method == "POST":
+        try:
+            data = org_schema.loads(request.body)
+            obj = Organization.objects.create(**data)
+        except ValidationError as err:
+            share_flash(request, error="Exists errors on form")
+            share_flash(request, errors= err.messages)
+        else:
+            share_flash(request, success=f"Organization {obj.name} created")
+            return redirect(reverse("demo:organizations"))
+    return render_inertia(request, "Organizations.Create", {})
+
+
 def organization_edit(request, id):
     organization = Organization.objects.get(id=id)
     schema = OrganizationSchema()
 
     if request.method == "POST":
         try:
-            schema.loads(request.body)
+            data = schema.loads(request.body)
         except ValidationError as err:
             share_flash(request, error="Exists errors on form")
             share_flash(request, errors= err.messages)
@@ -124,7 +141,7 @@ def contact_create(request):
             obj = Contact.objects.create(**c)
         except ValidationError as err:
             share_flash(request, error="Exists errors on form")
-            print(err)
+
             share_flash(request, errors= err.messages)
         else:
             share_flash(request, success=f"Contact {obj.name} created")
