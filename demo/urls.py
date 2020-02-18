@@ -3,14 +3,20 @@ from django.urls import path
 from demo.views import index , contacts,organizations
 from demo.views import contact_edit, organization_edit
 from demo.views import contact_create, organization_create
+from demo.views import login_view as login
+from demo.views import logout_view as logout
 
 app_name="demo"
 
 urlpatterns = [
 
+    path('login', login, name='login'),
+    path('users/logout', logout, name='logout'),
+
     path('reports', index, name='reports'),
     path('users/', index, name='users'),
-    path('users/logout', index, name='logout'),
+
+
     path('users/edit/<int:id>', index, name='users.edit'),
     path('contacts/edit/<int:id>', contact_edit, name='contacts.edit'),
     path('contacts/create/', contact_create, name='contacts.create'),

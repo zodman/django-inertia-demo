@@ -26,8 +26,10 @@ import OrganizationEdit from "./Pages/Organizations.Edit";
 import ContactCreate from "./Pages/Contacts.Create";
 import OrganizationCreate from "./Pages/Organizations.Create";
 
+import Login from "./Pages/Login";
 
 const pages = {
+  'Login': Login,
   'Index': Index,
   'Contacts': Contacts,
   'Contacts.Edit': ContactEdit,

@@ -10,6 +10,8 @@ from django.forms import model_to_dict
 from .serializers import ContactSchema, OrganizationSchema
 import json
 from marshmallow import  INCLUDE, ValidationError
+from django.contrib.auth import authenticate, login, logout
+
 
 
 def organization_create(request):
@@ -155,3 +157,26 @@ def contact_create(request):
 def index(request):
     # share_flash(request, errors=["yeah",])
     return render_inertia(request, "Index")
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse("demo:login"))
+
+def login_view(request):
+    errors = {}
+    if request.user.is_authenticated:
+        return redirect(reverse("demo:dashboard"))
+
+    if request.method == "POST":
+        data  = json.loads(request.body)
+        username = data.get("email")
+        password = data.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(reverse("demo:dashboard"))
+        else:
+            errors = {'email':["Wrong login",]}
+            share_flash(request, errors=errors)
+    props = {'errors':errors}
+    return render_inertia(request, "Login",props)
