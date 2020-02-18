@@ -5,7 +5,7 @@
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
+    <trashed-message v-if="organization.deleted" class="mb-6" @restore="restore">
       This organization has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
@@ -111,17 +111,17 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      this.$inertia.put(this.route('demo:organizations.edit', this.organization.id), this.form)
+      this.$inertia.post(this.route('demo:organizations.edit', this.organization.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
+        this.$inertia.delete(this.route('demo:organizations.edit', this.organization.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(this.route('organizations.restore', this.organization.id))
+        this.$inertia.put(this.route('demo:organizations.edit', this.organization.id))
       }
     },
   },

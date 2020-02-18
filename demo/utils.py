@@ -1,14 +1,18 @@
 from inertia.share import share
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
-
+from django.db import models
 
 def _filter(request, objects, filter_param):
     trashed = request.GET.get("trashed","")
     if trashed == "with":
+        objects = objects.filter(models.Q(deleted=True)|models.Q(deleted=False))
+    elif trashed == "only":
         objects = objects.filter(deleted=True)
     search =  request.GET.get("search", "")
-    if search != "" and search !="undefined":
+    if search =="undefined":
+        search = ""
+    if search != "":
         d = {filter_param: search}
         objects = objects.filter(**d)
     return objects

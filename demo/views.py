@@ -15,8 +15,31 @@ from marshmallow import  INCLUDE, ValidationError
 def organization_edit(request, id):
     organization = Organization.objects.get(id=id)
     schema = OrganizationSchema()
+
+    if request.method == "POST":
+        try:
+            schema.loads(request.body)
+        except ValidationError as err:
+            share_flash(request, error="Exists errors on form")
+            share_flash(request, errors= err.messages)
+        else:
+            Organization.objects.filter(id=id).update(**data)
+            share_flash(request, success="Updated Organization")
+            return redirect(reverse("demo:organizations"))
+    if request.method == "DELETE":
+        organization.deleted = True
+        organization.save()
+        share_flash(request, success="Organization Deleted")
+        return redirect(reverse("demo:organizations"))
+    if request.method == "PUT":
+        organization.deleted = False
+        organization.save()
+        share_flash(request, success="Organization Undeleted")
+        return redirect(reverse("demo:organizations"))
+
+    org = schema.dump(organization)
     props = {
-        'organization': schema.dump(organization)
+        'organization': org
     }
     return render_inertia(request, "Organizations.Edit", props)
 
@@ -24,7 +47,7 @@ def organization_edit(request, id):
 def organizations(request):
     org_sche = OrganizationSchema(many=True)
     objects = Organization.objects.all()
-    _filter(request, objects, "name__icontains")
+    objects = _filter(request, objects, "name__icontains")
     args = ("id","name", 'region','city','phone')
     objs, links = _get_objs(request, objects, args,"demo:organizations")
     trashed = request.GET.get("trashed","")
@@ -83,8 +106,6 @@ def contact_edit(request, id):
         contact.save()
         share_flash(request, success="Contact Deleted")
         return redirect(reverse("demo:contacts"))
-
-
 
     props = {
         'contact': c.dump(contact),

@@ -26,7 +26,7 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('demo:organizations.edit', organization.id)">
               {{ organization.name }}
-              <icon v-if="organization.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              <icon v-if="organization.deleted" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
@@ -88,7 +88,7 @@ export default {
       handler: throttle(function() {
         let query = pickBy(this.form)
         let url = this.route('demo:organizations') + "?";
-        url += Object.keys(query).length ? "&search=" + query.search : "&remember=true" 
+        url += Object.keys(query).length ? "&search=" + query.search + "&trashed="+ query.trashed : "&remember=true" 
         console.log("url", url);
         this.$inertia.replace(url)
 
