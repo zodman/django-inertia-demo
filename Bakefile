@@ -1,3 +1,8 @@
+docker-build:
+    docker build -t pingcrm .
+
+docker-run:
+    docker run -p 8000:8000 pingcrm
 
 update:
 	pip-compile -o requirements.txt
@@ -6,10 +11,13 @@ setup:
 	pip install -r requirements.txt
 	pip install coverage pip-tools
 	npm install
+	npm run build
 	python manage.py migrate
 	python populate.py
-	python manage.py createsuperuser
+	python manage.py createsuperuser  --username admin --email admin@admin.com
 
 test:
 	coverage run manage.py test
 	coverage report
+
+all: setup test docker-build

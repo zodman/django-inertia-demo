@@ -6,3 +6,4 @@ marshmallow
 inertia-django
 gunicorn
 django-webserver[gunicorn]
+bake-cli
