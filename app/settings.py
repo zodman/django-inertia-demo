@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'js_routes',
     'inertia',
     'django_seed',
+    'django_webserver',
 ]
 
 MIDDLEWARE = [

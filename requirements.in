@@ -3,4 +3,5 @@ django-js-routes
 django-seed
 django-test-plus
 marshmallow 
-git+https://github.com/zodman/inertia-django.git
+inertia-django
+gunicorn
