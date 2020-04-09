@@ -128,3 +128,9 @@ demo/static/dist
 .vscode
 .__*
 tags
+.git
+.gitignore
+node_modules
+coverage
+htmlcov
+tags

@@ -1,8 +1,12 @@
-docker-build:
+docker/build:
     docker build -t pingcrm .
 
-docker-run:
+docker/run:
     docker run -p 8000:8000 pingcrm
+
+
+docker: setup docker/build docker/run
+    echo "All ready"
 
 update:
 	pip-compile -o requirements.txt
