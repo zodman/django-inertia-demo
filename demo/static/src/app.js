@@ -28,6 +28,7 @@ import OrganizationCreate from "./Pages/Organizations.Create";
 
 import Login from "./Pages/Login";
 
+
 const pages = {
   'Login': Login,
   'Index': Index,
