@@ -5,6 +5,7 @@
 #    pip-compile --output-file=requirements.txt
 #
 asgiref==3.2.3            # via django
+git+https://github.com/zodman/inertia-django.git
 django-js-routes==0.1.3
 django-seed==0.2.2
 django-test-plus==1.4.0

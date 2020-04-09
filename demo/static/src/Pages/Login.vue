@@ -35,7 +35,7 @@ export default {
     TextInput,
   },
   props: {
-    errors: Array,
+    errors: Array
   },
   data() {
     return {
