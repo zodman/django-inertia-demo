@@ -11,11 +11,11 @@ https://pingcrm.fly.dev/
 
 ### Demo Images
 
-![](https://i.imgur.com/9vQ1pzV.png)
+![Image1](https://i.imgur.com/9vQ1pzV.png)
 
-![](https://i.imgur.com/0GbJBwU.png)
+![Image2](https://i.imgur.com/0GbJBwU.png)
 
-![](http://g.recordit.co/YoGQwh49JI.gif)
+![Image3](http://g.recordit.co/YoGQwh49JI.gif)
 
 ### For run
 
