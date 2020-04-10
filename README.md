@@ -4,8 +4,10 @@
 
 @inertiajs/inertia-vue+parcel+django
 
-![](https://i.imgur.com/9vQ1pzV.png)
+
+### Demo Site![](https://i.imgur.com/9vQ1pzV.png)
 ![](https://i.imgur.com/0GbJBwU.png)
+https://pingcrm.fly.dev/
 
 ![](http://g.recordit.co/YoGQwh49JI.gif)
 
