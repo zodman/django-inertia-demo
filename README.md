@@ -5,9 +5,15 @@
 @inertiajs/inertia-vue+parcel+django
 
 
-### Demo Site![](https://i.imgur.com/9vQ1pzV.png)
-![](https://i.imgur.com/0GbJBwU.png)
+### Demo Site
+
 https://pingcrm.fly.dev/
+
+### Demo Images
+
+![](https://i.imgur.com/9vQ1pzV.png)
+
+![](https://i.imgur.com/0GbJBwU.png)
 
 ![](http://g.recordit.co/YoGQwh49JI.gif)
 
