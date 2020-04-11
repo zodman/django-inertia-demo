@@ -11,6 +11,7 @@ Vue.config.productionTip = true;
 Vue.use(InertiaApp);
 Vue.use(PortalVue);
 
+
 Vue.mixin({ methods: { route: window.reverseUrl } });
 
 const app = document.getElementById('app');

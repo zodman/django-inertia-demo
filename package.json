@@ -32,6 +32,7 @@
     "cross-env": "^7.0.2",
     "lodash": "^4.17.15",
     "parcel": "^2.0.0-nightly.208",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-watch-reload": "0.0.2",
     "popper.js": "^1.16.1",
     "portal-vue": "^2.1.7",
@@ -39,7 +40,6 @@
     "tailwindcss": "^1.2.0",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
-    "parcel-bundler": "^1.12.4",
     "vue-template-compiler": "^2.6.11"
   }
 }
