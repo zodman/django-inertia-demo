@@ -1,9 +1,12 @@
-@tailwind base;
 @import "./reset.scss";
+@tailwind base;
 @tailwind components;
+
+
+@tailwind utilities;
+
+
 @import "./buttons.css";
 @import "./form.css";
 @import "./nprogress.css";
 
-
-@tailwind utilities;
