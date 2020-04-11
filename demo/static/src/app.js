@@ -7,7 +7,7 @@ import PortalVue from 'portal-vue'
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 Vue.use(InertiaApp);
 Vue.use(PortalVue);
