@@ -25,7 +25,7 @@ SECRET_KEY = 'pteg6f_+4sl&1hnzq0^v-05%o79h3gq&m82$3=2rkx(3@%_mhs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pingcrm.fly.dev']
 
 
 # Application definition
@@ -108,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -131,3 +133,7 @@ STATIC_URL = '/static/'
 JS_ROUTES_INCLUSION_LIST = [
     'demo',
 ]
+
+CSRF_HEADER_NAME="HTTP_X_CSRFTOKEN"
+
+VERSION=2
