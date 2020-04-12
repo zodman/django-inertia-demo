@@ -4,6 +4,9 @@
 
 @inertiajs/inertia-vue+parcel+django
 
+For more info: [inertia-django](https://github.com/zodman/inertia-django)
+
+
 
 ### Demo Site
 
