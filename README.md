@@ -7,7 +7,7 @@
 
 ### Demo Site
 
-https://pingcrm.fly.dev/
+https://inertia.opensrc.mx/
 
 ### Demo Images
 
