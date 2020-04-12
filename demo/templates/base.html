@@ -6,9 +6,9 @@
     {% js_routes %}
     <script src="{{ STATIC_URL}}dist/app.js" defer></script>
     <link href="{{ STATIC_URL}}dist/app.css" rel="stylesheet" />
-            
   </head>
   <body class="font-sans leading-none text-gray-700 antialiased">
+    {% csrf_token %}
     {{ page|json_script:"page" }}
     <div id="app">
     </div>
