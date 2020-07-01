@@ -1,4 +1,4 @@
-# django-intertia-demo
+# django-inertia-demo
 
 [![Build Status](https://travis-ci.org/zodman/django-inertia-demo.svg?branch=master)](https://travis-ci.org/zodman/django-inertia-demo)
 
