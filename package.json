@@ -30,7 +30,7 @@
     "axios": "^0.19.2",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "parcel": "^2.0.0-nightly.208",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-watch-reload": "0.0.2",
