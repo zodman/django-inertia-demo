@@ -133,3 +133,4 @@ node_modules
 coverage
 htmlcov
 tags
+./demo/static/dist

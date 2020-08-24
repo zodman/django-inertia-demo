@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'inertia',
     'django_seed',
     'django_webserver',
+    'favicon',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'demo.middleware.DemoMiddleware',
+    'inertia.middleware.InertiaMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -135,6 +137,10 @@ JS_ROUTES_INCLUSION_LIST = [
     'demo',
 ]
 
+FAVICON_PATH = STATIC_URL + 'favicon.png'
+
 # CSRF_HEADER_NAME="HTTP_X_CSRFTOKEN"
 
 VERSION=2
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"

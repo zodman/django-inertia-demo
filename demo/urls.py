@@ -15,14 +15,15 @@ urlpatterns = [
 
     path('reports', index, name='reports'),
     path('users/', index, name='users'),
-
-
     path('users/edit/<int:id>', index, name='users.edit'),
+
+
     path('contacts/edit/<int:id>', contact_edit, name='contacts.edit'),
     path('contacts/create/', contact_create, name='contacts.create'),
     path('contacts', contacts, name='contacts'),
     path('organizations/edit/<int:id>', organization_edit, name='organizations.edit'),
     path('organizations/create/', organization_create, name='organizations.create'),
+    path('organizations/store/', organization_create, name='organizations.store'),
     path('organizations', organizations, name='organizations'),
     path('dashboard', index, name='dashboard'),
     path('', index, name='index'),

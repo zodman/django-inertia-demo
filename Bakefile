@@ -25,3 +25,8 @@ test:
 	coverage report
 
 all: setup test docker-build
+
+
+update:
+    cp ../pingcrm/resources/js/{Pages,Shared} demo/static/src/ -rf
+    cp ../pingcrm/resources/css/*.css demo/static/src/

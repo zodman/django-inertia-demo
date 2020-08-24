@@ -15,7 +15,6 @@
 <script>
 import Popper from 'popper.js'
 
-
 export default {
   props: {
     placement: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('demo:contacts')">Contacts</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('contacts')">Contacts</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
     </h1>
@@ -24,7 +24,6 @@
           <text-input v-model="form.region" :errors="$page.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :errors="$page.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
-            <option value="MX">Mexico</option>
             <option value="CA">Canada</option>
             <option value="US">United States</option>
           </select-input>
@@ -40,12 +39,11 @@
 </template>
 
 <script>
-import Layout from '../Shared/Layout'
-import LoadingButton from '../Shared/LoadingButton'
-import SelectInput from '../Shared/SelectInput'
-import TextInput from '../Shared/TextInput'
-import TrashedMessage from '../Shared/TrashedMessage'
-
+import Layout from '@/Shared/Layout'
+import LoadingButton from '@/Shared/LoadingButton'
+import SelectInput from '@/Shared/SelectInput'
+import TextInput from '@/Shared/TextInput'
+import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo() {
@@ -85,17 +83,17 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      this.$inertia.post(this.route('demo:contacts.edit', this.contact.id), this.form)
+      this.$inertia.put(this.route('contacts.update', this.contact.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
-        this.$inertia.delete(this.route('demo:contacts.edit', this.contact.id))
+        this.$inertia.delete(this.route('contacts.destroy', this.contact.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this contact?')) {
-        this.$inertia.put(this.route('demo:contacts.restore', this.contact.id))
+        this.$inertia.put(this.route('contacts.restore', this.contact.id))
       }
     },
   },

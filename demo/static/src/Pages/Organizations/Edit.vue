@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('demo:organizations')">Organizations</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('organizations')">Organizations</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="organization.deleted" class="mb-6" @restore="restore">
+    <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
       This organization has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
@@ -40,23 +40,23 @@
         </tr>
         <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('demo:contacts.edit', contact.id)">
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
               {{ contact.name }}
-              <icon v-if="contact.deleted" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('demo:contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               {{ contact.city }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('demo:contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               {{ contact.phone }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('demo:contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
@@ -70,12 +70,12 @@
 </template>
 
 <script>
-import Icon from '../Shared/Icon'
-import Layout from '../Shared/Layout'
-import LoadingButton from '../Shared/LoadingButton'
-import SelectInput from '../Shared/SelectInput'
-import TextInput from '../Shared/TextInput'
-import TrashedMessage from '../Shared/TrashedMessage'
+import Icon from '@/Shared/Icon'
+import Layout from '@/Shared/Layout'
+import LoadingButton from '@/Shared/LoadingButton'
+import SelectInput from '@/Shared/SelectInput'
+import TextInput from '@/Shared/TextInput'
+import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo() {
@@ -111,17 +111,17 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      this.$inertia.post(this.route('demo:organizations.edit', this.organization.id), this.form)
+      this.$inertia.put(this.route('organizations.update', this.organization.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(this.route('demo:organizations.edit', this.organization.id))
+        this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(this.route('demo:organizations.edit', this.organization.id))
+        this.$inertia.put(this.route('organizations.restore', this.organization.id))
       }
     },
   },

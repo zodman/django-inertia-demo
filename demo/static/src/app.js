@@ -11,22 +11,25 @@ Vue.config.productionTip = true;
 Vue.use(InertiaApp);
 Vue.use(PortalVue);
 
+let customRoute = (...args) => {
+    args[0] = 'demo:' + args[0];
+    return window.reverseUrl(...args);
+}
 
-Vue.mixin({ methods: { route: window.reverseUrl } });
+Vue.mixin({ methods: { route: customRoute } });
 
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script
 const page = JSON.parse(document.getElementById("page").textContent);
 
-import Index from "./Pages/Index";
-import Contacts from "./Pages/Contacts";
-import Organization from "./Pages/Organizations";
-import ContactEdit from "./Pages/Contacts.Edit";
-import OrganizationEdit from "./Pages/Organizations.Edit";
-import ContactCreate from "./Pages/Contacts.Create";
-import OrganizationCreate from "./Pages/Organizations.Create";
-
-import Login from "./Pages/Login";
+import Index from "./Pages/Dashboard/Index";
+import Organization from "./Pages/Organizations/Index";
+import OrganizationEdit from "./Pages/Organizations/Edit";
+import OrganizationCreate from "./Pages/Organizations/Create";
+import Contacts from "./Pages/Contacts/Index";
+import ContactCreate from "./Pages/Contacts/Create";
+import ContactEdit from "./Pages/Contacts/Edit";
+import Login from "./Pages/Auth/Login";
 
 
 const pages = {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Dropdown from './Dropdown'
+import Dropdown from '@/Shared/Dropdown'
 
 export default {
   components: {
