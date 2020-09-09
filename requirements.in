@@ -8,3 +8,4 @@ gunicorn
 django-webserver[gunicorn]
 bake-cli
 fabric
+django-favicon
