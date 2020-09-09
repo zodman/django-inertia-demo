@@ -13,7 +13,6 @@ from marshmallow import  INCLUDE, ValidationError
 from django.contrib.auth import authenticate, login, logout
 
 
-
 def organization_create(request):
     props = {}
     org_schema = OrganizationSchema()
@@ -58,10 +57,10 @@ def organization_edit(request, id):
 
     org = schema.dump(organization)
     props = {
-        'organization': org
+        'organization': org,
+        'errors': {}
     }
     return render_inertia(request, "Organizations.Edit", props)
-
 
 def organizations(request):
     org_sche = OrganizationSchema(many=True)
@@ -87,18 +86,19 @@ def organizations(request):
 def contacts(request):
     objects = Contact.objects.all()
     objects = _filter(request, objects, "first_name__icontains")
-    trashed = request.GET.get("trashed","")
-    search =  request.GET.get("search", "")
-    args = ("id","organization__name", "first_name", "last_name",'city','phone')
+    trashed = request.GET.get("trashed", "")
+    search = request.GET.get("search", "")
+    args = ("id", "organization__name", "first_name", "last_name", 
+            'city', 'phone')
     objs, links = _get_objs(request, objects, args, "demo:contacts")
     contact_schema = ContactSchema(many=True)
     props = {
-        'links':links,
-        'contact_list': contact_schema.dump(objs),
+        'links': links,
+        'contacts': { "data": contact_schema.dump(objs)},
         'filters': {
-            'search':search,
-            'trashed':trashed,
-       }
+            'search': search,
+            'trashed': trashed,
+        }
     }
     return render_inertia(request, "Contacts", props)
 
@@ -106,16 +106,16 @@ def contacts(request):
 def contact_edit(request, id):
     contact = Contact.objects.get(id=id)
     c = ContactSchema()
-    org_schema = OrganizationSchema(many=True, only=("id","name"))
+    org_schema = OrganizationSchema(many=True, only=("id", "name"))
     orgs = Organization.objects.all()
 
     if request.method == "POST":
-        data= json.loads(request.body)
+        data = json.loads(request.body)
         try:
-            data_serialized = c.load(data, unknown=INCLUDE)
-        except ValidationError  as err:
+            c.load(data, unknown=INCLUDE)
+        except ValidationError as err:
             share_flash(request, error="Exists errors on form")
-            share_flash(request, errors= err.messages)
+            share_flash(request, errors=err.messages)
         else:
             Contact.objects.filter(id=id).update(**data)
             share_flash(request, success="Updated contact")
@@ -125,16 +125,16 @@ def contact_edit(request, id):
         contact.save()
         share_flash(request, success="Contact Deleted")
         return redirect(reverse("demo:contacts"))
-
     props = {
         'contact': c.dump(contact),
         'organizations': org_schema.dump(orgs)
     }
     return render_inertia(request, "Contacts.Edit", props)
 
+
 def contact_create(request):
     contact_schema = ContactSchema()
-    org_schema = OrganizationSchema(many=True, only=("id","name"))
+    org_schema = OrganizationSchema(many=True, only=("id", "name"))
     orgs = Organization.objects.all()
 
     if request.method == "POST":
@@ -144,7 +144,7 @@ def contact_create(request):
         except ValidationError as err:
             share_flash(request, error="Exists errors on form")
 
-            share_flash(request, errors= err.messages)
+            share_flash(request, errors=err.messages)
         else:
             share_flash(request, success=f"Contact {obj.name} created")
             return redirect(reverse("demo:contacts"))
@@ -158,9 +158,11 @@ def index(request):
     # share_flash(request, errors=["yeah",])
     return render_inertia(request, "Index")
 
+
 def logout_view(request):
     logout(request)
     return redirect(reverse("demo:login"))
+
 
 def login_view(request):
     errors = {'email':[]}

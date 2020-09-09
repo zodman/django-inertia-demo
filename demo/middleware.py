@@ -35,8 +35,5 @@ class DemoMiddleware:
                         'email': "request.user.email",
                     }
                 })
-        share(request, "flash", {'success':request.session.get("success",False),
-                                 'error':request.session.get("error", False)})
-        share(request, 'errors', request.session.get("errors",[]) )
         response = self.get_response(request)
         return response

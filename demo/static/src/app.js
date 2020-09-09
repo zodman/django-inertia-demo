@@ -31,7 +31,6 @@ import ContactCreate from "./Pages/Contacts/Create";
 import ContactEdit from "./Pages/Contacts/Edit";
 import Login from "./Pages/Auth/Login";
 
-
 const pages = {
   'Login': Login,
   'Index': Index,
@@ -43,13 +42,12 @@ const pages = {
   "Organizations.Create": OrganizationCreate
 }
 
-
 new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: page,
       resolveComponent: (name) => {
-        console.log("resolveComponent ", name)
+        console.log("resolveComponent ", name, pages[name])
         return pages[name];
       },
     },
