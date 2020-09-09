@@ -8,7 +8,7 @@ docker/run:
 docker: setup docker/build docker/run
     echo "All ready"
 
-update:
+sync:
 	pip-compile -o requirements.txt
 
 setup:
