@@ -10,7 +10,7 @@ bcrypt==3.2.0             # via paramiko
 cffi==1.14.2              # via bcrypt, cryptography, pynacl
 click==7.1.2              # via bake-cli
 colorama==0.4.3           # via bake-cli
-cryptography==3.1         # via paramiko
+cryptography==3.2         # via paramiko
 decorator==4.4.2          # via networkx
 delegator.py==0.1.1       # via bake-cli
 django-favicon==0.1.3     # via -r requirements.in
