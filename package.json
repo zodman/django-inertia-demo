@@ -23,8 +23,9 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.12.3",
-    "@inertiajs/inertia": "^0.6.2",
+    "@inertiajs/inertia": "^0.6.0",
     "@inertiajs/inertia-vue": "^0.4.2",
+    "@inertiajs/progress": "^0.2.2",
     "@vue/component-compiler-utils": "^3.2.0",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.0",

@@ -1,14 +1,16 @@
-import { InertiaApp } from '@inertiajs/inertia-vue'
+import { App, plugin } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
 import axios from "axios";
 import PortalVue from 'portal-vue'
+import { InertiaProgress } from '@inertiajs/progress/src'
+
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 Vue.config.productionTip = true;
 
-Vue.use(InertiaApp);
+Vue.use(plugin);
 Vue.use(PortalVue);
 
 let customRoute = (...args) => {
@@ -17,6 +19,8 @@ let customRoute = (...args) => {
 }
 
 Vue.mixin({ methods: { route: customRoute } });
+
+InertiaProgress.init();
 
 const app = document.getElementById('app');
 // we are getting the initialPage from a rendered json_script
@@ -31,6 +35,7 @@ import ContactCreate from "./Pages/Contacts/Create";
 import ContactEdit from "./Pages/Contacts/Edit";
 import Login from "./Pages/Auth/Login";
 
+
 const pages = {
   'Login': Login,
   'Index': Index,
@@ -43,7 +48,7 @@ const pages = {
 }
 
 new Vue({
-  render: h => h(InertiaApp, {
+  render: h => h(App, {
     props: {
       initialPage: page,
       resolveComponent: (name) => {

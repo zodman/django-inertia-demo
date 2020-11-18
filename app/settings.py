@@ -53,8 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'demo.middleware.DemoMiddleware',
     'inertia.middleware.InertiaMiddleware',
+    'demo.middleware.DemoMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -144,3 +144,4 @@ FAVICON_PATH = STATIC_URL + 'favicon.png'
 VERSION=2
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
+INERTIA_SHARE=False

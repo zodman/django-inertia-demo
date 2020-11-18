@@ -28,8 +28,11 @@ urlpatterns = [
 
     path('organizations/edit/<int:id>', organization_edit,
          name='organizations.edit'),
+    path('organizations/update/<int:id>', organization_edit,
+         name='organizations.update'),
     path('organizations/destroy/<int:id>', organization_edit,
          name='organizations.destroy'),
+
     path('organizations/create/', organization_create,
          name='organizations.create'),
     path('organizations/store/', organization_create,

@@ -29,4 +29,7 @@ module.exports = {
     zIndex: ['responsive', 'focus'],
   },
   plugins: [],
+  purge: {
+      content: ['./demo/static/src/**/*.vue']
+  }
 }

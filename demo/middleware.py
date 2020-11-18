@@ -8,7 +8,7 @@ class DemoMiddleware:
         # One-time configuration and initialization.
 
     def __call__(self, request):
-        
+
         if request.user.is_authenticated: 
             share(request, 'auth', {
                     'user':{
@@ -29,7 +29,7 @@ class DemoMiddleware:
                             'id':"request.user.id",
                             'name':"request.user.username",
                         },
-                        'id': "request.user.id",
+                        'id': "none",
                         'firt_name': "request.user.first_name",
                         'last_name': "request.user.last_name",
                         'email': "request.user.email",
