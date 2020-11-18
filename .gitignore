@@ -134,4 +134,4 @@ coverage
 htmlcov
 tags
 demo/static/dist/*
-static
+static/
