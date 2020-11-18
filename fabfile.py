@@ -2,9 +2,10 @@ from fabric import task
 from invoke import run
 from patchwork.transfers import rsync
 
-@task
+@task(hosts=["zodman@inertia.opensrc.mx",])
 def deploy(ctx):
     run("yarn install", echo=True)
+    run('rm .cache demo/static/src/app.css -rf', echo=True)
     run("yarn run build", echo=True)
     run("python manage.py collectstatic --noinput", echo=True)
     run("find . -name '__pycache__' |xargs rm -rf ", echo=True)
